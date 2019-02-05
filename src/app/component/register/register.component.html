@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+      <h4 class="card-title mt-3 text-center">Create Account</h4>
+      <p class="text-center">Get started with your free account</p>
+
+      <form (ngSubmit)="RegisterUser(register)" [formGroup]="myRegisterForm">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            name="FirstName"
+            class="form-control"
+            placeholder="First Name"
+            type="text"
+            [(ngModel)]="register.FirstName"
+            formControlName="FirstName"
+            [ngClass]="{
+              'is-invalid':
+                submitted && myRegisterForm.controls.FirstName.errors
+            }"
+          />
+          <div
+            *ngIf="myRegisterForm.controls.FirstName.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="myRegisterForm.controls.FirstName.errors.required">
+              First Name is required
+            </div>
+          </div>
+          <!-- <div>First Name is required</div> -->
+        </div>
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            name="LastName"
+            class="form-control"
+            placeholder="Last Name"
+            type="text"
+            [(ngModel)]="register.LastName"
+            formControlName="LastName"
+            [ngClass]="{
+              'is-invalid': submitted && myRegisterForm.controls.LastName.errors
+            }"
+          />
+          <div
+            *ngIf="myRegisterForm.controls.LastName.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="myRegisterForm.controls.LastName.errors.required">
+              Last name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            name="Username"
+            class="form-control"
+            placeholder="Email"
+            type="text"
+            [(ngModel)]="register.Username"
+            formControlName="Username"
+            [ngClass]="{
+              'is-invalid': submitted && myRegisterForm.controls.Username.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && myRegisterForm.controls.Username.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="myRegisterForm.controls.Username.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="myRegisterForm.controls.Username.errors.email">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            name="Password"
+            class="form-control"
+            placeholder="Password"
+            type="password"
+            [(ngModel)]="register.Password"
+            formControlName="Password"
+            [ngClass]="{
+              'is-invalid': submitted && myRegisterForm.controls.Password.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && myRegisterForm.controls.Password.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="myRegisterForm.controls.Password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+            <div *ngIf="myRegisterForm.controls.Password.errors.required">
+              Password is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            name="ConfirmPassword"
+            class="form-control"
+            placeholder="Confirm Password"
+            type="password"
+            formControlName="ConfirmPassword"
+            [ngClass]="{
+              'is-invalid':
+                submitted && myRegisterForm.controls.ConfirmPassword.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && myRegisterForm.controls.ConfirmPassword.errors"
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="myRegisterForm.controls.ConfirmPassword.errors.required"
+            >
+              Confirm Password is required
+            </div>
+            <div
+              *ngIf="myRegisterForm.controls.ConfirmPassword.errors.mustMatch"
+            >
+              Passwords must match
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">
+            Create Account
+          </button>
+        </div>
+        <!-- form-group// -->
+        <p class="text-center">Have an account? <a routerLink="">Log In</a></p>
+      </form>
+    </article>
+  </div>
+  <!-- card.// -->
+</div>
+<!--container end.//-->
+
+<br /><br />

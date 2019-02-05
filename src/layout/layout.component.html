@@ -1,0 +1,28 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <mdb-navbar-brand>
+    <a class="navbar-brand" href="#">Navbar / text</a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" href="#" mdbWavesEffect
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" href="#" mdbWavesEffect></a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link waves-light"
+          (click)="Logout()"
+          href="#"
+          mdbWavesEffect
+          >Logout</a
+        >
+      </li>
+    </ul>
+    <span class="navbar-text white-text"> Demo Angular 7 </span>
+  </links>
+</mdb-navbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,198 @@
+<div class="container">
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    class="relative waves-light"
+    (click)="basicModal.show()"
+    mdbWavesEffect
+  >
+    Add Employee
+  </button>
+
+  <div
+    mdbModal
+    #basicModal="mdbModal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myBasicModalLabel"
+    aria-hidden="true"
+  >
+    <form (ngSubmit)="AddEmployee(employee)" [formGroup]="myEmployeeForm">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close pull-right"
+              aria-label="Close"
+              (click)="basicModal.hide()"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title w-100" id="myModalLabel">
+              Add Employee Detail
+            </h4>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" value="{{ employee.Id }}" />
+            <div class="form-group">
+              <select
+                class="form-control"
+                [(ngModel)]="employee.ID_City"
+                formControlName="ID_City"
+              >
+                <option disabled selected value>Select City</option>
+                <option *ngFor="let item of listCity" value="{{ item.Id }}">{{
+                  item.Name
+                }}</option>
+              </select>
+            </div>
+            <div class="form-group input-group">
+              <input
+                name="Name"
+                class="form-control"
+                placeholder="First Name"
+                type="text"
+                [(ngModel)]="employee.Name"
+                formControlName="Name"
+              />
+
+              <!-- <div>First Name is required</div> -->
+            </div>
+            <div class="form-group input-group">
+              <input
+                name="Mobile"
+                class="form-control"
+                placeholder="Mobile Number"
+                type="number"
+                [(ngModel)]="employee.Mobile"
+                formControlName="Mobile"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-check-inline">
+                <input
+                  type="radio"
+                  name="Gender"
+                  value="Male"
+                  [(ngModel)]="employee.Gender"
+                  formControlName="Gender"
+                />
+                Male
+              </label>
+              <label class="form-check-inline">
+                <input
+                  type="radio"
+                  name="Gender"
+                  value="Female"
+                  [(ngModel)]="employee.Gender"
+                  formControlName="Gender"
+                />
+                Female
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              mdbBtn
+              color="secondary"
+              class="waves-light"
+              aria-label="Close"
+              (click)="basicModal.hide()"
+              mdbWavesEffect
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              mdbBtn
+              color="primary"
+              class="relative waves-light"
+              mdbWavesEffect
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="md-form">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchText"
+          (keyup)="searchItems()"
+          id="search-input"
+          mdbInputDirective
+        />
+        <label for="search-input">Search</label>
+      </div>
+    </div>
+    <table
+      mdbTable
+      stickyHeader="true"
+      hover="true"
+      striped="true"
+      class="z-depth-1"
+    >
+      <thead class="sticky-top">
+        <tr>
+          <th
+            *ngFor="let head of headElements; let i = index"
+            [mdbTableSort]="elements"
+            [sortBy]="headElements[i]"
+            scope="col"
+          >
+            {{ head }} <mdb-icon fas icon="sort"></mdb-icon>
+          </th>
+        </tr>
+      </thead>
+      <tbody #row>
+        <tr mdbTableCol *ngFor="let el of elements; let i = index">
+          <th *ngIf="i + 1 >= firstItemIndex && i < lastItemIndex" scope="row">
+            {{ el.Name }}
+          </th>
+          <td
+            *ngIf="i + 1 >= firstItemIndex && i < lastItemIndex"
+            class="red-text"
+          >
+            {{ el.Mobile }}
+          </td>
+          <td *ngIf="i + 1 >= firstItemIndex && i < lastItemIndex">
+            {{ el.Gender }}
+          </td>
+          <td *ngIf="i + 1 >= firstItemIndex && i < lastItemIndex">
+            <i class="fas fa-trash" (click)="DeleteEmployee(el.Id)"></i>
+            <i
+              class="fas fa-pen"
+              style="margin-left: 10px;"
+              (click)="GetEmployeeReportbyId(el)"
+            ></i>
+          </td>
+          <!-- <td *ngIf="i + 1 >= firstItemIndex && i < lastItemIndex">
+            {{ el.handle }}
+          </td> -->
+        </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+        <tr>
+          <td colspan="4">
+            <mdb-table-pagination
+              paginationAlign=""
+              [searchDataSource]="elements"
+              (nextPageClick)="onNextPageClick($event)"
+              (previousPageClick)="onPreviousPageClick($event)"
+            ></mdb-table-pagination>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
